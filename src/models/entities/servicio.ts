@@ -9,6 +9,10 @@ export class Servicio {
     
     @PrimaryGeneratedColumn()
     id!:number
+
+    @Column()
+    nombre!: string
+
     
     @Column()
     tipoServicio!:number

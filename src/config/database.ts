@@ -11,7 +11,8 @@ export default new DataSource({
     password: "root",
     database: "tp",
     entities: [Incidente, Servicio, Establecimiento],
-    synchronize: true,
-    logging: false
+    synchronize: false,
+    migrationsRun:false,
+    logging: true
 })
 

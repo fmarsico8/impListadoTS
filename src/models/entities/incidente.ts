@@ -25,6 +25,6 @@ export class Incidente {
 
     @Column()
     descripcionLugar!:string
-    
+
     servicio: any;
 }
