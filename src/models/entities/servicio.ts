@@ -1,6 +1,7 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Establecimiento } from "./establecimiento";
 import { Incidente } from "./incidente";
+import { TipoServicio } from "./tipoServicio";
 
 @Entity()
 export class Servicio {
@@ -13,9 +14,9 @@ export class Servicio {
     @Column()
     nombre!: string
 
-    
-    @Column()
-    tipoServicio!:number
+    @ManyToOne(() => TipoServicio)
+    @JoinColumn({ name: "tipoServicio_id" })
+    tipoServicio!:TipoServicio
 
     @Column()
     estaActivo!:boolean

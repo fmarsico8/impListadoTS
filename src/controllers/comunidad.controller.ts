@@ -1,15 +1,15 @@
 import {Request, Response, NextFunction} from "express";
 import { DatabaseRepository } from "../declarations";
-import { promises } from "dns";
-import { Incidente } from "../models/entities/incidente";
+import { Establecimiento } from "../models/entities/establecimiento";
+import { Comunidad } from "../models/entities/comunidad";
 
-export class IncidenteController {
-        constructor(private repository: DatabaseRepository<Incidente>){}
+export class ComunidadController {
+        constructor(private repository: DatabaseRepository<Comunidad>){}
         
         async list( req: Request, res: Response, next: NextFunction): Promise<void> {
             try {
-                const incidente = await this.repository.list();
-                res.status(200).json(incidente)
+                const establecimiento = await this.repository.list();
+                res.status(200).json(establecimiento)
             } catch(error) {
                 next(error)
             }
@@ -26,6 +26,15 @@ export class IncidenteController {
                 next(error);
             }
 
+        }
+
+        async libros(req: Request, res: Response):Promise<void> {
+            try {
+                const libros = await this.repository.list();
+                res.render("incidentes.liquid", {libros})
+            } catch(error) {
+                next(error)
+            }
         }
 
 }

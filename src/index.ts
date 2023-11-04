@@ -13,15 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 
 const engine = new Liquid({
-  root: "./src/views",
+  root: "./src/resources/views",
   extname: '.liquid'
 });
 
-const publicPath = path.resolve('src\public', 'public')
-app.use(express.static(publicPath))
+app.use(express.static('./src/resources/public'))
 
 app.engine('liquid', engine.express())
-app.set('views', './src/public/views')
+app.set('views', './src/resources/views')
 app.set('view engine', 'liquid')
 
 database.initialize()

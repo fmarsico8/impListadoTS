@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Servicio } from "./servicio";
 
 @Entity()
 export class Incidente {
@@ -8,10 +9,10 @@ export class Incidente {
     @Column()
     estado!: String
 
-    @UpdateDateColumn()
+    @Column()
     fechaApertura!:Date
 
-    @UpdateDateColumn()
+    @Column()
     fechaCierre!:Date
 
     @Column()
@@ -26,5 +27,7 @@ export class Incidente {
     @Column()
     descripcionLugar!:string
 
-    servicio: any;
-}
+    @ManyToOne(() => Servicio, (servicio) => servicio.incidentes)
+    @JoinColumn({ name: "servicio_id" })
+    servicio!: Servicio;
+    }

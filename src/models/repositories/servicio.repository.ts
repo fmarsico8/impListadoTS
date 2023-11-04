@@ -8,8 +8,12 @@ export class ServicioRepository implements DatabaseRepository<Servicio> {
     }
     list(query?: Query | undefined): Promise<Servicio[]> {
         const repository = database.getRepository(Servicio);
-
-        return repository.find();    }
+        return repository
+        .createQueryBuilder('servicio')
+        .leftJoinAndSelect('servicio.tipoServicio', 'tipoServicio') 
+        .leftJoinAndSelect('servicio.incidentes', 'incidentes')
+        .getMany();
+   }
     get(id: Id, query?: Query | undefined): Promise<Servicio> {
         throw new Error("Method not implemented.");
     }

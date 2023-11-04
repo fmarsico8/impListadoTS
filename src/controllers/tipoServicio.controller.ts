@@ -1,9 +1,9 @@
 import {Request, Response, NextFunction} from "express";
 import { DatabaseRepository } from "../declarations";
-import { Servicio } from "../models/entities/servicio";
+import { TipoServicio } from "../models/entities/tipoServicio";
 
-export class ServicioController {
-        constructor(private repository: DatabaseRepository<Servicio>){}
+export class TipoServicioController {
+        constructor(private repository: DatabaseRepository<TipoServicio>){}
         
         async list( req: Request, res: Response, next: NextFunction): Promise<void> {
             try {
@@ -35,28 +35,6 @@ export class ServicioController {
                 next(error)
             }
         }
-
-        async filter(req: Request, res: Response, next: NextFunction): Promise<void> {
-            try {
-                const param = req.params.id;
-                const id = parseInt(param, 10);
-                const libro = await this.repository.list();
-                const filteredLibro = libro.filter((l) => l.tipoServicio.id === id);
-                res.status(200).json(filteredLibro);
-            } catch (error) {
-                next(error);
-            }
-        }
-
-        async listado(req: Request, res: Response):Promise<void> {
-            try {
-                const servicios = await this.repository.list();
-                res.render("listadoIncidentes.liquid", {servicios})
-            } catch(error) {
-                next(error)
-            }
-        }
-        
 
 }
 
