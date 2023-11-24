@@ -19,10 +19,10 @@ export class Incidente {
     descripcion!:string
 
     @Column()
-    miembroDeApertura!:number
+    miembroDeApertura_id!:number
 
     @Column()
-    miembroDeCierre!:number
+    miembroDeCierre_id!:number
 
     @Column()
     descripcionLugar!:string
