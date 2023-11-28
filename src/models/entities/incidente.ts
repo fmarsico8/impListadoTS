@@ -1,5 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Servicio } from "./servicio";
+import { format } from 'date-fns';
+
 
 @Entity()
 export class Incidente {
@@ -30,4 +32,7 @@ export class Incidente {
     @ManyToOne(() => Servicio, (servicio) => servicio.incidentes)
     @JoinColumn({ name: "servicio_id" })
     servicio!: Servicio;
+
+    fechaFormateada!: String
+
     }

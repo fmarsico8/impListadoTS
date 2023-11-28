@@ -1,6 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import { DatabaseRepository } from "../declarations";
 import { Servicio } from "../models/entities/servicio";
+import { format } from "date-fns";
 
 export class ServicioController {
         constructor(private repository: DatabaseRepository<Servicio>){}
@@ -48,12 +49,20 @@ export class ServicioController {
             }
         }
 
-        async listado(req: Request, res: Response):Promise<void> {
+        async listado(req: Request, res: Response, next: NextFunction): Promise<void> {
             try {
                 const servicios = await this.repository.list();
-                res.render("listadoIncidentes.liquid", {servicios})
-            } catch(error) {
-                next(error)
+        
+                // Formatear las fechas de cada incidente
+                servicios.forEach(servicio => {
+                    servicio.incidentes.forEach(incidente => {
+                        incidente.fechaFormateada = format(incidente.fechaApertura, 'dd/MM/yyyy HH:mm:ss');
+                    });
+                });
+        
+                res.render("listadoIncidentes.liquid", { servicios });
+            } catch (error) {
+                next(error);
             }
         }
         

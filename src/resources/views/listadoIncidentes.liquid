@@ -49,7 +49,7 @@
                         <td style="padding-right: 30px;">{{ servicio.nombre}}</td>
                         <td style="padding-right: 30px;">{{ servicio.tipoServicio.nombre}}</td>
                         <td style="padding-right: 30px;">{{ incidente.descripcion}}</td>
-                        <td style="padding-right: 30px;">{{ incidente.fechaApertura}}</td>
+                        <td style="padding-right: 30px;">{{ incidente.fechaFormateada}}</td>
                         {% if incidente.estado == "ABIERTO" %}
                         <td style="padding-right: 30px;background-color: green;color: white;;">{{ incidente.estado}}</td>
                         {% else %}
